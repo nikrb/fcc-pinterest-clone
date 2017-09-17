@@ -1,5 +1,6 @@
-* {
-  box-sizing: border-box;
+
+body {
+  margin: 0;
 }
 
 .App {
@@ -8,23 +9,57 @@
   align-items: center;
 }
 .image_grid {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 95vw;
+  width: 95%;
+  margin: 2em auto;
 }
 
-.masonry { /* Masonry container */
-  column-count: 4;
+.masonry {
+  margin: 1em 0;
+  padding: 0;
   column-gap: 1em;
+  font-size: .85em;
 }
 
-.item { /* Masonry bricks or child elements */
-  background-color: #eee;
+.item {
   display: inline-block;
-  margin: 0 0 1em;
+  background: #fff;
+  /*padding: 1em;*/
+  margin: 0 0 1.5em;
   width: 100%;
-  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 8px 0 #ccc;
+  border-radius: 10px
+}
+
+
+@media only screen and (min-width: 400px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .masonry {
+    column-count: 3;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .masonry {
+    column-count: 4;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .masonry {
+    column-count: 5;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .wrapper {
+    width: 1260px;
+  }
 }
 
 /* boilerplate from auth-react-base */
