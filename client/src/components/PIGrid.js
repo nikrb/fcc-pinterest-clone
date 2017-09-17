@@ -1,10 +1,12 @@
 import React from 'react';
+import FavouriteButton from './FavouriteButton';
+import DeleteButton from './DeleteButton';
+import ImageDefault from './ImageDefault';
 
 export default class PIGrid extends React.Component {
   render = () => {
     const {data} = this.props;
-    const heart = String.fromCharCode( 10084);
-    const heart_style = { color: "red"};
+    const favourite_count = 99;
     const card_style = {
       display: "flex",
       flexDirection: "column",
@@ -14,14 +16,25 @@ export default class PIGrid extends React.Component {
     const image_style = {
       maxWidth: "100%"
     };
+    const button_wrapper = {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      width: "90%"
+    };
     const pix = data.map( (p,i) => {
       return (
         <div className="item" key={i} >
           <div style={card_style} >
-            <img style={image_style} src={p} alt="missing" />
-            <p>some text</p>
-            <button className="heart_button" type="button" ><span style={heart_style}>{heart}</span></button>
+            <ImageDefault style={image_style} src={p}
+              missing_url="http://via.placeholder.com/200x100?text=noimage"/>
+            <span>some text</span>
+            <div style={button_wrapper}>
+              <DeleteButton />
+              <FavouriteButton favourite_count={favourite_count} />
             </div>
+          </div>
         </div>
       );
     });
