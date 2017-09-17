@@ -1,8 +1,10 @@
 fcc project build a pinterest clone
 
 ack:
+* Rahul Arora css masonry [article](http://w3bits.com/css-masonry/)
 * Michelle Barker flex box grid on [codepen](https://codepen.io/michellebarker/pen/zvxpoG?editors=0100)
 * Ohans Emmanuel on medium.com [article](https://medium.freecodecamp.org/the-ultimate-guide-to-flexbox-learning-through-examples-8c90248d4676)
+* Jhey Tompkins on codeburst [article](https://codeburst.io/how-to-pure-css-masonry-layouts-a8ede07ba31a)
 
 create a base for react authentication.
 
