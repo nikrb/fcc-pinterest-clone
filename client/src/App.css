@@ -2,32 +2,32 @@
   box-sizing: border-box;
 }
 
-.container {
-  background-color: #f2f2f2;
-  padding: 10px;
-  border: 2px solid #CCCCCC;
-  max-width: 900px;
-  margin: 0 auto;
-  height: 470px;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-.item {
-  background-color: orange;
-  /*height: 150px;*/
-  width: 31%;
-  margin: 1%;
-  padding: 10px;
-}
-
 .App {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+.image_grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 95vw;
+}
+
+.masonry { /* Masonry container */
+  column-count: 4;
+  column-gap: 1em;
+}
+
+.item { /* Masonry bricks or child elements */
+  background-color: #eee;
+  display: inline-block;
+  margin: 0 0 1em;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* boilerplate from auth-react-base */
 .active {
   color: steelblue;
 }
@@ -75,9 +75,20 @@ button:hover {
 }
 button:focus {
   outline: 0;
-  box-shadow: 0px 0px 10px orange;
+  /*box-shadow: 0px 0px 10px orange;*/
 }
 
+.heart_button {
+  margin: 5px;
+  font-size: 1.5em;
+  background: transparent;
+  /*border: none;*/
+  /*border-radius: 100%;*/
+  outline: none;
+}
+.heart_button:hover {
+  color: green;
+}
 input {
   line-height: 1.5em;
   border-radius: 5px;
@@ -105,3 +116,5 @@ input:focus {
   color: tomato;
   font-size: 10px;
 }
+
+/* Rahuls responsive suggestions */
