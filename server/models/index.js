@@ -10,4 +10,5 @@ module.exports.connect = (uri) => {
   });
 
   require( './user');
+  require( './pimage');
 };
