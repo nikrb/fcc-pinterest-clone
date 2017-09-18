@@ -1,8 +1,10 @@
 import React from 'react';
-import PIGrid from '../components/PIGrid';
+import ImageWall from '../components/ImageWall';
+import Auth from '../modules/Auth';
 
 export default class HomePage extends React.Component {
   render = () => {
+    console.log( "user id:", Auth.get_id());
     // generate a list of pics
     const bu = "https://via.placeholder.com/";
     const data = [
@@ -12,9 +14,7 @@ export default class HomePage extends React.Component {
     return (
       <div className="App">
         <h1>pcloneInterest</h1>
-        <div className="image_grid">
-          <PIGrid data={data} />
-        </div>
+        <ImageWall data={data} />
       </div>
     );
   };
