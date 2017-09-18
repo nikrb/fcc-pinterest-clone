@@ -6,7 +6,12 @@ import Auth from '../modules/Auth';
 export default class SettingsPage extends React.Component {
   state = {
     errors: {},
-    user: { password:"", new_password: ""}
+    user: {
+      password:"",
+      new_password: "",
+      name: Auth.getUsername(),
+      email: Auth.getEmail()
+    }
   };
   changeUser = ( event) => {
     // event target name not user name!
@@ -36,9 +41,25 @@ export default class SettingsPage extends React.Component {
     });
   };
   render = () => {
+    const base_detail = {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center"
+    };
+    const base_text = {
+      margin: "5px"
+    };
     return (
+      <div className="App" >
+        <h1 style={{textAlign:"center"}}>Settings</h1>
+        <div style={base_detail}>
+          <span style={base_text}>Name: {this.state.user.name}</span>
+          <span style={base_text}>Email: {this.state.user.email}</span>
+        </div>
         <SettingsForm onSubmit={this.processForm} onChange={this.changeUser}
           user={this.state.user} errors={this.state.errors} />
+      </div>
     );
   };
 }
