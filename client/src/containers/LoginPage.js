@@ -54,8 +54,10 @@ export default class LoginPage extends React.Component {
       );
     }
     return (
-      <LoginForm onSubmit={this.processForm} onChange={this.changeUser}
-        user={this.state.user} errors={this.state.errors} />
+      <div className="App">
+        <LoginForm onSubmit={this.processForm} onChange={this.changeUser}
+          user={this.state.user} errors={this.state.errors} />
+      </div>
     );
   };
 }
