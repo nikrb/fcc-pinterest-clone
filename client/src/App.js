@@ -5,6 +5,7 @@ import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import SignupPage from './containers/SignupPage';
 import SettingsPage from './containers/SettingsPage';
+import MyWall from './containers/MyWall';
 import Auth from './modules/Auth';
 
 export default class App extends Component {
@@ -40,6 +41,7 @@ export default class App extends Component {
             <ul>
               <div className="nav-box">
                 <li><NavLink to="/" exact>Home</NavLink></li>
+                <li><NavLink to="/mywall" exact>My Wall</NavLink></li>
               </div>
               <div className="nav-box">
                 { Auth.isUserAuthenticated()?
@@ -65,6 +67,7 @@ export default class App extends Component {
                 <LoginPage {...props} onLogin={this.login} />} />
             <Route path="/signup" component={SignupPage} />
             <AuthRoute path="/settings" component={SettingsPage} />
+            <AuthRoute path="/mywall" component={MyWall} />
             <Route path="*" render={props => <Redirect to='/' {...props} /> } />
           </Switch>
         </div>
