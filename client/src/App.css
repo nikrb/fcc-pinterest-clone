@@ -110,7 +110,7 @@ button {
   margin: 5px;
   font-size: 1.5em;
   font-weight: bold;
-  background: linear-gradient( -40deg, lightblue, steelblue); /* lawngreen, springgreen); */
+  background: linear-gradient( -40deg, lightblue, steelblue);
   border-radius: 10px;
 }
 button:hover {
