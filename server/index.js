@@ -32,8 +32,10 @@ app.use('/api', authCheckMiddleware);
 
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
+const apoRoutes = require( './routes/apo');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+app.use('/apo', apoRoutes);
 
 app.listen(app.get('port'), () => {
   console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
