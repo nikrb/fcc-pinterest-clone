@@ -8,8 +8,17 @@ export default class HomePage extends React.Component {
     // generate a list of pics
     const bu = "https://via.placeholder.com/";
     const data = [
-      bu+"350x100", "bloopydoo", bu+"100x350", bu+"350x100", bu+"250x250", bu+"250x350",
-      bu+"250x150", bu+"100x100", bu+"100x100", bu+"100x100", bu+"100x100"
+      { url:bu+"350x100", title: "one", favourites: []},
+      { url:"bloopydoo", title:"nope", favourites: []},
+      { url: bu+"100x350", title:"two", favourites: ["a"]},
+      { url:bu+"350x100", title:"three", favourites: []},
+      { url: bu+"250x250", title: "four", favourites: []},
+      { url:bu+"250x350", title: "five", favourites: []},
+      { url:bu+"250x150", title: "six", favourites: []},
+      { url: bu+"100x100", title: "seven", favourites: []},
+      { url: bu+"100x100", title: "eight", favourites: []},
+      { url: bu+"100x100", title: "nine", favourites: []},
+      { url: bu+"100x100", title: "ten", favourites: []}
     ];
     return (
       <div className="App">
