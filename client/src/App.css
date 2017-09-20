@@ -107,6 +107,7 @@ li a:hover {
 }*/
 
 button {
+  cursor: pointer;
   margin: 5px;
   font-size: 1.5em;
   font-weight: bold;
