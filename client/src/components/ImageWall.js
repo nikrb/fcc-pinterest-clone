@@ -5,7 +5,7 @@ export default class ImageWall extends React.Component {
   render = () => {
     return (
       <div className="image_grid">
-        <PIGrid data={this.props.data} />
+        <PIGrid {...this.props} />
       </div>
     );
   };

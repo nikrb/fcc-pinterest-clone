@@ -27,7 +27,18 @@ PImageSchema.statics.create = function create( req_body, cb){
     });
   });
 };
-
+PImageSchema.statics.deleteImage = function deleteImage(  req_body, cb){
+  const {_id} = req_body;
+  this.findByIdAndRemove( {_id})
+  .exec( function( err, data){
+    if( err || !data){
+      console.error( "PImage delete failed:", err);
+      if( cb) cb( err, {success:false, message: "image not removed"});
+    } else {
+      if( cb) cb( null, {success: true, data});
+    }
+  });
+};
 PImageSchema.statics.getByUserId = function getByUserId( req_body, cb){
   const {owner, offset, limit} = req_body;
   this.find( {owner}, [], {

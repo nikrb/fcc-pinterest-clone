@@ -15,5 +15,11 @@ router.post( '/userimage', (req, res) => {
     res.json( result);
   });
 });
+router.delete( '/userimage', (req,res) => {
+  PImage.deleteImage( req.body, function( err, result){
+    if( err) console.error( "delete pimage failed:", err);
+    res.json( result);
+  });
+});
 
 module.exports = router;

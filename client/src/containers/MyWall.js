@@ -2,7 +2,7 @@ import React from 'react';
 import Auth from '../modules/Auth';
 import ImageWall from '../components/ImageWall';
 import NewImageDialogue from '../components/NewImageDialogue';
-import {getUserImages,createNewImage} from './PImageActions';
+import {getUserImages,createNewImage,deleteImage} from './PImageActions';
 
 export default class MyWall extends React.Component {
   state = {
@@ -50,12 +50,23 @@ export default class MyWall extends React.Component {
       }
     });
   };
+  onDeleteImage = ( _id) => {
+    deleteImage( {_id})
+    .then( (response) => {
+      console.log( "delete image response:", response);
+      const image_list = this.state.image_list.filter( (i) => {
+        return i._id !== _id;
+      });
+      this.setState( {image_list});
+    });
+  };
   render = () => {
     return (
       <div className="App">
         <h1>My Wall</h1>
         <button type="button" onClick={this.onShowNewImageDlg} >Add Image</button>
-        <ImageWall data={this.state.image_list} show_delete={true} />
+        <ImageWall data={this.state.image_list}
+          onDeleteClicked={this.onDeleteImage} />
         {this.state.show_new_image_dialogue?
           <NewImageDialogue onCancel={this.onNewImageCancel}
             onOK={this.onNewImageOK} />

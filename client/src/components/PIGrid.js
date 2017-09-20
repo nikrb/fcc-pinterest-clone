@@ -5,7 +5,7 @@ import ImageDefault from './ImageDefault';
 
 export default class PIGrid extends React.Component {
   render = () => {
-    const {data, show_delete} = this.props;
+    const {data} = this.props;
     const card_style = {
       display: "flex",
       flexDirection: "column",
@@ -30,8 +30,8 @@ export default class PIGrid extends React.Component {
               missing_url="http://via.placeholder.com/200x100?text=noimage"/>
             <span>{p.title}</span>
             <div style={button_wrapper}>
-              {show_delete?
-                <DeleteButton />
+              {this.props.onDeleteClicked?
+                <DeleteButton onClick={this.props.onDeleteClicked} data={p._id} />
                 // blank div to keep favourite button on right
                 :<div/>
               }

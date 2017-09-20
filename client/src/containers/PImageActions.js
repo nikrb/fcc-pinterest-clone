@@ -37,3 +37,16 @@ export function createNewImage( payload){
   .then( checkStatus)
   .then( parseJSON);
 }
+export function deleteImage( payload){
+  return fetch( '/api/userimage', {
+    method: 'delete',
+    headers: {
+      'Accept': "application/json",
+      'Content-Type': 'application/json',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    body: JSON.stringify( payload)
+  })
+  .then( checkStatus)
+  .then( parseJSON);
+}
