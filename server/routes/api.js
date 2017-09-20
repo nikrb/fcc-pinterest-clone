@@ -21,5 +21,11 @@ router.delete( '/userimage', (req,res) => {
     res.json( result);
   });
 });
+router.post( '/favourite', (req,res) => {
+  PImage.addFavourite( req.body, function( err, result){
+    if( err) console.error( "add favourite failed:", err);
+    res.json( result);
+  })
+});
 
 module.exports = router;

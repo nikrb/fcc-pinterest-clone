@@ -2,7 +2,7 @@ import React from 'react';
 import Auth from '../modules/Auth';
 import ImageWall from '../components/ImageWall';
 import NewImageDialogue from '../components/NewImageDialogue';
-import {getUserImages,createNewImage,deleteImage} from './PImageActions';
+import {getUserImages,createNewImage, deleteImage} from './PImageActions';
 
 export default class MyWall extends React.Component {
   state = {

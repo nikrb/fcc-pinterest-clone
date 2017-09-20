@@ -39,6 +39,33 @@ PImageSchema.statics.deleteImage = function deleteImage(  req_body, cb){
     }
   });
 };
+PImageSchema.statics.addFavourite = function addFavourite( req_body, cb){
+  const {_id, favouriteer} = req_body;
+  this.findById( {_id}, function( err, pimage){
+    if( err || !pimage){
+      console.error( "add favourite find by id failed:", err);
+      if( cb) cb( err, {success:false, message: "image not found"});
+    } else {
+      const already = pimage.favourites.filter( (user_id) => {
+        console.log( `user [${favouriteer}] already favourited [${user_id}]`);
+        return user_id == favouriteer;
+      });
+      if( already.length){
+        if( cb) cb( "user already favourited", {success: false, message: "Already favourited"});
+      } else {
+        pimage.favourites = pimage.favourites.concat( favouriteer);
+        pimage.save( function( err){
+          if( err){
+            console.error( "add favourite save failed:", err);
+            if( cb) cb( err, {success:false, message: 'add favourite failed'});
+          } else {
+            if( cb) cb( null, {success: true, pimage});
+          }
+        });
+      }
+    }
+  });
+};
 PImageSchema.statics.getByUserId = function getByUserId( req_body, cb){
   const {owner, offset, limit} = req_body;
   this.find( {owner}, [], {

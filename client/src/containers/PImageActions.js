@@ -50,3 +50,17 @@ export function deleteImage( payload){
   .then( checkStatus)
   .then( parseJSON);
 }
+
+export function addFavourite( payload){
+  return fetch( '/api/favourite', {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    body: JSON.stringify( payload)
+  })
+  .then( checkStatus)
+  .then( parseJSON);
+}

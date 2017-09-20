@@ -35,7 +35,8 @@ export default class PIGrid extends React.Component {
                 // blank div to keep favourite button on right
                 :<div/>
               }
-              <FavouriteButton favourite_count={p.favourites.length||0} />
+              <FavouriteButton data={p._id} favourite_count={p.favourites.length||0}
+                onFavouriteClick={this.props.onFavouriteClicked} />
             </div>
           </div>
         </div>
