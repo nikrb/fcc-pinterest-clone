@@ -39,6 +39,15 @@ export default class MyWall extends React.Component {
     createNewImage( payload)
     .then( (response) => {
       console.log( "create new image response:", response);
+      // response.pimage
+      if( response.success){
+        const img = {...response.pimage,
+          url: decodeURIComponent( response.pimage.url),
+          title: decodeURIComponent( response.pimage.title)
+        };
+        const image_list = this.state.image_list.concat( img);
+        this.setState( {image_list});
+      }
     });
   };
   render = () => {
