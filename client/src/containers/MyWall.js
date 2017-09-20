@@ -55,7 +55,7 @@ export default class MyWall extends React.Component {
       <div className="App">
         <h1>My Wall</h1>
         <button type="button" onClick={this.onShowNewImageDlg} >Add Image</button>
-        <ImageWall data={this.state.image_list} />
+        <ImageWall data={this.state.image_list} show_delete={true} />
         {this.state.show_new_image_dialogue?
           <NewImageDialogue onCancel={this.onNewImageCancel}
             onOK={this.onNewImageOK} />
