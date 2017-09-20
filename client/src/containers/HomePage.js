@@ -1,29 +1,27 @@
 import React from 'react';
 import ImageWall from '../components/ImageWall';
-import Auth from '../modules/Auth';
+import {getAllImages} from './PImageActions';
 
 export default class HomePage extends React.Component {
+  state = {
+    data: []
+  };
+  componentWillMount = () => {
+    getAllImages()
+    .then( (response) => {
+      console.log( response);
+      const data = response.data.map( (i) => {
+        return {...i, url: decodeURIComponent( i.url),
+          title: decodeURIComponent( i.title)};
+      });
+      this.setState( {data});
+    });
+  };
   render = () => {
-    console.log( "user id:", Auth.get_id());
-    // generate a list of pics
-    const bu = "https://via.placeholder.com/";
-    const data = [
-      { url:bu+"350x100", title: "one", favourites: []},
-      { url:"bloopydoo", title:"nope", favourites: []},
-      { url: bu+"100x350", title:"two", favourites: ["a"]},
-      { url:bu+"350x100", title:"three", favourites: []},
-      { url: bu+"250x250", title: "four", favourites: []},
-      { url:bu+"250x350", title: "five", favourites: []},
-      { url:bu+"250x150", title: "six", favourites: []},
-      { url: bu+"100x100", title: "seven", favourites: []},
-      { url: bu+"100x100", title: "eight", favourites: []},
-      { url: bu+"100x100", title: "nine", favourites: []},
-      { url: bu+"100x100", title: "ten", favourites: []}
-    ];
     return (
       <div className="App">
         <h1>pcloneInterest</h1>
-        <ImageWall data={data} />
+        <ImageWall data={this.state.data} />
       </div>
     );
   };
