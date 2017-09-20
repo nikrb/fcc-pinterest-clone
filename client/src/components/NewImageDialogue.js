@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImageDefault from './ImageDefault';
-import DeleteButton from './DeleteButton';
 
 export default class NewImageDialogue extends React.Component {
   static propTypes = {
@@ -19,6 +18,17 @@ export default class NewImageDialogue extends React.Component {
   onUrlChange = (e) => {
     this.setState( {url_text: e.target.value});
   };
+  grabUrl = () => {
+    this.setState( {url: this.state.url_text});
+  };
+  onUrlBlur = (e) => {
+    this.grabUrl();
+  };
+  handleUrlKeyUp = (e) => {
+    if( e.keyCode === 13){
+      this.grabUrl();
+    }
+  };
   onOK = (e) => {
     this.props.onOK( this.state.url_text);
     this.setState( {url: this.state.url_text});
@@ -28,8 +38,16 @@ export default class NewImageDialogue extends React.Component {
   };
   render = () => {
     const {title, url, url_text} = this.state;
-    const image_box_style = { width: "200px", height: "200px"};
-    const image_style = { maxWidth: "100%" };
+    const image_box_style = {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems:"center",
+      width: "200px",
+      height: "200px"
+    };
+    const {width,height} = image_box_style;
+    const image_style = { maxWidth: width, maxHeight: height };
     const wrapper = {
       padding: "0px 20px",
       border: "2px solid darkgrey",
@@ -51,6 +69,7 @@ export default class NewImageDialogue extends React.Component {
       fontSize: "0.8em",
       marginBottom: "1em"
     };
+    const reload_symbol = String.fromCharCode( 8635);
     return (
       <div className="container" style={wrapper} >
         <h3>Add New Image</h3>
@@ -64,9 +83,13 @@ export default class NewImageDialogue extends React.Component {
         </div>
         <div style={ip_wrapper} >
           Url
-          <input type="text" value={url_text} onChange={this.onUrlChange} />
+          <input type="text" value={url_text}
+            onChange={this.onUrlChange}
+            onKeyUp={this.handleUrlKeyUp}
+            onBlur={this.onUrlBlur}/>
         </div>
         <div style={btn_wrapper}>
+          <button type="button" onClick={this.grabUrl} >{reload_symbol}</button>
           <button type="button" onClick={this.onOK} >OK</button>
           <button type="button" onClick={this.onCancel} >Cancel</button>
         </div>
