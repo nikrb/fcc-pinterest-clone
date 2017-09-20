@@ -9,8 +9,8 @@ router.post('/userimages', (req, res) => {
   });
 });
 
-router.post( './userimage', (req, res) => {
-  PImage.create( req_body, function( err, result){
+router.post( '/userimage', (req, res) => {
+  PImage.create( req.body, function( err, result){
     if( err) console.error( "create pimage failed:", err);
     res.json( result);
   });
