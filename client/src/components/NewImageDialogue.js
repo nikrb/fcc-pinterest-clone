@@ -30,7 +30,7 @@ export default class NewImageDialogue extends React.Component {
     }
   };
   onOK = (e) => {
-    this.props.onOK( this.state.url_text);
+    this.props.onOK( {url:this.state.url_text, title:this.state.title});
     this.setState( {url: this.state.url_text});
   };
   onCancel = (e) => {
