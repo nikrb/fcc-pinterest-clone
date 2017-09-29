@@ -48,14 +48,14 @@ export default class HomePage extends React.Component {
       color: "tomato",
       background: show?"linen":"inherit"
     };
+    const authed = Auth.isUserAuthenticated();
     return (
       <div className="App">
         <h1>pcloneInterest</h1>
         <Message style={message_style} text={this.state.message_text}
           removeMessage={this.onRemoveMessage} />
         <ImageWall data={this.state.image_list}
-          allow_favourite={Auth.isUserAuthenticated()}
-          onFavouriteClicked={this.onAddFavourite} />
+          onFavouriteClicked={authed?this.onAddFavourite:null} />
       </div>
     );
   };
