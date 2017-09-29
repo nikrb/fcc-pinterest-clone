@@ -1,4 +1,4 @@
-fcc project build a pinterest clone
+fcc project build a pinterest clone [demo](https://knik-fcc-pclone.herokuapp.com)
 
 # User Stories
 1. As an unauthenticated user, I can login with Twitter.
