@@ -5,7 +5,7 @@ import ImageDefault from './ImageDefault';
 
 export default class PIGrid extends React.Component {
   render = () => {
-    const {data} = this.props;
+    const {data,allow_favourite} = this.props;
     const card_style = {
       display: "flex",
       flexDirection: "column",
@@ -35,7 +35,9 @@ export default class PIGrid extends React.Component {
                 // blank div to keep favourite button on right
                 :<div/>
               }
-              <FavouriteButton data={p._id} favourite_count={p.favourites.length||0}
+              <FavouriteButton data={p._id}
+                favourite_count={p.favourites.length||0}
+                allow_favourite={allow_favourite}
                 onFavouriteClick={this.props.onFavouriteClicked} />
             </div>
           </div>

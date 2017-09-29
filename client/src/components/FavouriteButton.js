@@ -2,14 +2,16 @@ import React from 'react';
 
 export default class FavouriteButton extends React.Component {
   onClick = () => {
-    this.props.onFavouriteClick( this.props.data);
+    if( this.props.allow_favourite){
+      this.props.onFavouriteClick( this.props.data);
+    }
   };
   render = () => {
-    const {favourite_count} = this.props;
+    const {favourite_count,allow_favourite} = this.props;
     const heart = String.fromCharCode( 10084);
     const heart_style = {
       cursor: this.props.onFavouriteClick?"pointer":"inherit",
-      color: "red",
+      color: allow_favourite?"red":"lightgrey",
       fontSize: this.props.onFavouriteClick?"1em":"1.5em"
     };
     const wrapper = {
