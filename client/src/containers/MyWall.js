@@ -11,7 +11,7 @@ export default class MyWall extends React.Component {
   };
   componentWillMount = () => {
     const owner = Auth.get_id();
-    getUserImages( {owner, limit:10, offset: 0})
+    getUserImages( {owner}) // , limit:10, offset: 0})
     .then( (response) => {
       console.log( "get user images response:", response);
       if( response.data){
