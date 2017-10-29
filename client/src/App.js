@@ -2,35 +2,42 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch, NavLink } from 'react-router-dom';
 import './App.css';
 import HomePage from './containers/HomePage';
-import LoginPage from './containers/LoginPage';
-import SignupPage from './containers/SignupPage';
-import SettingsPage from './containers/SettingsPage';
 import MyWall from './containers/MyWall';
 import Auth from './modules/Auth';
 
 export default class App extends Component {
-  state = {
-    is_logged_in : Auth.isUserAuthenticated(),
-    user : {name:"", email:""}
-  };
   componentWillMount = () => {
-    if( Auth.isUserAuthenticated()){
-      const username = Auth.getUsername();
-      const email = Auth.getEmail();
-      this.setState( { user : {name: username?username:"", email: email?email:""}});
-    }
+    Auth.checkUser()
+    .then( (response)=>{
+      console.log( "fetch auth/user result:", response);
+      if( response.success){
+        Auth.authUser( response.user);
+      } else {
+        Auth.deauthUser();
+      }
+    })
+    .catch( (err) => {
+      console.error( "fetch auth/user failed:", err);
+      Auth.deauthUser();
+    });
   };
   logout = () => {
-    Auth.deauthenticateUser();
-    this.setState( {is_logged_in: false, user: {name:"", email:""}});
+    Auth.deauthUser();
+    Auth.logout()
+    .then( (response) => {
+      console.log( "auth logout response:", response);
+    })
+    .catch( (err) => {
+      console.error( "auth logout failed:", err);
+    });
   };
   // FIXME: this is horrible right?
   login = ( user) => {
-    this.setState( {is_logged_in: true, user: {name: user.name, email: user.email}});
+    // this.setState( {is_logged_in: true, user: {name: user.name, email: user.email}});
   };
 
   render() {
-    const username = this.state.user.name;
+    const username = Auth.getUser().name;
     const right_margin = {
       marginRight: "10px"
     };
@@ -46,15 +53,15 @@ export default class App extends Component {
               <div className="nav-box">
                 { Auth.isUserAuthenticated()?
                     <div className="nav-box">
-                      <li style={right_margin}>{this.state.user.name?`Hi ${username}`:""}</li>
-                      <li style={right_margin}><NavLink to='/settings' exact >&#x2699;</NavLink></li>
+                      <li style={right_margin}>{username?`Hi ${username}`:""}</li>
                       <li><a onClick={this.logout}>Logout</a></li>
                     </div>
                   :
-                  <li><NavLink to="/login" exact>Login</NavLink></li>
-                }
-                { Auth.isUserAuthenticated()?"":
-                  <li><NavLink to="/signup" exact>Signup</NavLink></li>
+                  <li>
+                    <a href="http://localhost:5000/auth/login/twitter" >
+                      Login
+                    </a>
+                  </li>
                 }
               </div>
             </ul>
@@ -63,16 +70,14 @@ export default class App extends Component {
           <hr/>
           <Switch>
             <Route exact path="/" component={HomePage}/>
-            <Route path="/login" render={props=>
-                <LoginPage {...props} onLogin={this.login} />} />
-            <Route path="/signup" component={SignupPage} />
-            <AuthRoute path="/settings" component={SettingsPage} />
             <AuthRoute path="/mywall" component={MyWall} />
-            <Route path="*" render={props => <Redirect to='/' {...props} /> } />
           </Switch>
         </div>
       </Router>
     );
+    // FIXME: seems this isn't intercepting the /auth/login/twitter route
+    // don't forget to put it back in!
+    // <Route path="*" render={props => <Redirect to='/' {...props} /> } />
   }
 };
 
@@ -82,7 +87,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
       <Component {...props}/>
     ) : (
       <Redirect to={{
-        pathname: '/login',
+        pathname: '/',
         state: { from: props.location }
       }}/>
     )
