@@ -1,30 +1,36 @@
-const authenticateUser = ( user) => {
-  localStorage.setItem( '_id', user._id);
-  localStorage.setItem( 'token', user.token);
-  localStorage.setItem( 'name', user.name);
-  localStorage.setItem( 'email', user.email);
-};
-const isUserAuthenticated = () => {
-  return localStorage.getItem( 'token') !== null;
-};
-const deauthenticateUser = () => {
-  localStorage.removeItem( '_id');
-  localStorage.removeItem( 'token');
-  localStorage.removeItem( 'name');
-  localStorage.removeItem( 'email');
-};
-const get_id = () => {
-  return localStorage.getItem( '_id');
-};
-const getToken = () => {
-  return localStorage.getItem( 'token');
-};
-const getUsername = () => {
-  return localStorage.getItem( 'name');
-};
-const getEmail = () => {
-  return localStorage.getItem( 'email');
+import {checkStatus, parseJSON} from '../modules/util';
+
+const checkUser = () => {
+  return fetch( "/auth/user")
+  .then( checkStatus)
+  .then( parseJSON);
 };
 
-export default { authenticateUser, isUserAuthenticated, deauthenticateUser,
-                  get_id, getToken, getUsername, getEmail};
+const logout = () => {
+  return fetch( "/auth/logout")
+  .then( checkStatus)
+  .then( parseJSON);
+};
+
+const authUser = ( {id, name}) => {
+  localStorage.setItem( "user_id", id);
+  localStorage.setItem( "user_name", name);
+};
+const deauthUser = () => {
+  localStorage.removeItem( "user_id");
+  localStorage.removeItem( "user_name");
+};
+const isUserAuthenticated = () => {
+  // FIXME: user auth
+  const id = localStorage.getItem( 'user_id');
+  return id?true:false;
+};
+const getUser = () => {
+  const user = {};
+  user.id = localStorage.getItem( "user_id");
+  user.name = localStorage.getItem( "user_name");
+  return user;
+};
+
+export default { checkUser, getUser, logout,
+  authUser, deauthUser, isUserAuthenticated};

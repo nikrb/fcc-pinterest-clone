@@ -1,33 +1,49 @@
+// testing prod local so always need dotenv
+// if( process.env.PORT !== "production"){
+  require( 'dotenv').config();
+// }
+
+process.env.PORT = process.env.PORT || 5000;
+
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require( 'express-session');
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require( 'mongoose');
 const passport = require( 'passport');
-if( process.env.PORT !== "production"){
-  require( 'dotenv').config();
-}
+
 require( './models').connect( process.env.dbUri);
+
 const app = express();
 
-const PORT = process.env.PORT || 5000;
-
-// Express only serves static assets in production
-if (process.env.NODE_ENV === 'production') {
-  app.use( '/', express.static('client/build'));
-
-  app.get('/', function (req, res) {
-    res.sendFile( 'client/build/index.html');
-  });
-}
-
 app.use( bodyParser.json());
+app.use( bodyParser.urlencoded({ extended: false }));
+
+app.use(session({
+  secret: "mysecretsessionpassword",
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
+
+app.use(function(req, res, next){
+  console.log( `request url [${req.url}]`);
+  next();
+});
+
 app.use( passport.initialize());
+app.use( passport.session());
 
-const localSignupStrategy = require('./passport/local-signup');
-const localLoginStrategy = require('./passport/local-login');
-passport.use('local-signup', localSignupStrategy);
-passport.use('local-login', localLoginStrategy);
+require( './passport/twitter-login')();
 
-const authCheckMiddleware = require('./middleware/auth-check');
-app.use('/api', authCheckMiddleware);
+// let's sort basic auth out first
+// const authCheckMiddleware = require('./middleware/auth-check');
+// app.use('/api', authCheckMiddleware);
+
+app.use(function(req, res, next){
+  console.log( `request user [${req.user}]`);
+  next();
+});
 
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
@@ -36,6 +52,15 @@ app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/apo', apoRoutes);
 
-app.listen( PORT, () => {
-  console.log(`Find the server at port [${PORT}]`); // eslint-disable-line no-console
+// Express only serves static assets in production
+if (process.env.NODE_ENV === 'production') {
+  app.use( '/', express.static('./client/build'));
+
+  app.get('/*', function (req, res) {
+    res.sendFile( './client/build/index.html');
+  });
+}
+
+app.listen( process.env.PORT, () => {
+  console.log(`Find the server at port [${process.env.PORT}]`); // eslint-disable-line no-console
 });
