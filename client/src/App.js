@@ -58,7 +58,7 @@ export default class App extends Component {
                     </div>
                   :
                   <li>
-                    <a href="http://localhost:5000/auth/login/twitter" >
+                    <a href="/auth/login/twitter" >
                       Login
                     </a>
                   </li>
