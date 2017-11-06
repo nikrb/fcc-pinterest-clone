@@ -10,9 +10,6 @@ router.get( "/login/twitter", function(req, res, next) {
 
 router.get( "/callback/twitter", function(req, res, next) {
   console.log( "twitter callback:", process.env.NODE_ENV);
-  const redir = process.env.NODE_ENV==="production"
-    ?process.env.PROD_BASE_URL:"http://localhost:3000";
-  console.log( "redir url:", redir);
   return passport.authenticate('twitter', {
     successRedirect: "/",
     failureRedirect: "/"
