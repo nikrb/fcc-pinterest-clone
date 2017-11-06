@@ -14,8 +14,8 @@ router.get( "/callback/twitter", function(req, res, next) {
     ?process.env.PROD_BASE_URL:"http://localhost:3000";
   console.log( "redir url:", redir);
   return passport.authenticate('twitter', {
-    successRedirect: redir,
-    failureRedirect: redir
+    successRedirect: "/",
+    failureRedirect: "/"
   })(req, res, next);
 });
 

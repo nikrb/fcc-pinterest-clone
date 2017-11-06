@@ -6,7 +6,8 @@ module.exports = function(){
   const base = process.env.NODE_ENV === "production"
     ? process.env.PROD_BASE_URL
     :`http://localhost:5000`;
-  const callback_url = `${base}/auth/callback/twitter`;
+  // const callback_url = `${base}/auth/callback/twitter`;
+  const callback_url = "/auth/callback/twitter";
 
   passport.use(new TwitterStrategy({
     consumerKey: process.env.CONSUMER_KEY, // config.twitter.consumerKey,
