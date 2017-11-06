@@ -26,6 +26,11 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
+app.use(function(req, res, next){
+  console.log( `request url [${req.url}]`);
+  next();
+});
+
 app.use( passport.initialize());
 app.use( passport.session());
 
@@ -36,7 +41,7 @@ require( './passport/twitter-login')();
 // app.use('/api', authCheckMiddleware);
 
 app.use(function(req, res, next){
-  console.log( "request user:", req.user);
+  console.log( `request user [${req.user}]`);
   next();
 });
 
