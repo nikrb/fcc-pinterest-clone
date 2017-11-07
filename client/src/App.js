@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch, NavLink } from 'react
 import './App.css';
 import HomePage from './containers/HomePage';
 import MyWall from './containers/MyWall';
+import AuthorWall from './containers/AuthorWall';
 import Auth from './modules/Auth';
 
 export default class App extends Component {
@@ -71,6 +72,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={HomePage}/>
             <AuthRoute path="/mywall" component={MyWall} />
+            <Route path="/authorwall" component={AuthorWall} />
           </Switch>
         </div>
       </Router>
@@ -78,6 +80,8 @@ export default class App extends Component {
     // FIXME: seems this isn't intercepting the /auth/login/twitter route
     // don't forget to put it back in!
     // <Route path="*" render={props => <Redirect to='/' {...props} /> } />
+    // ALSO don't forget to make mywall and authorwall AuthRoute's when we
+    // get twitter auth working
   }
 };
 
