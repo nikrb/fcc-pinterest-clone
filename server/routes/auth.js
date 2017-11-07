@@ -16,7 +16,12 @@ router.get( "/callback/twitter", function(req, res, next) {
   })(req, res, next);
 });
 
-router.get( "/user", function( req, res){
+function checkAuth(req, res, next) {
+    if (!req.isAuthenticated()) return res.status(401).send('Not authenticated');
+    return next();
+};
+
+router.get( "/user", checkAuth, function( req, res){
   console.log( "GET /auth/user :", req.user);
   res.send( {success: req.user?true:false, user: req.user});
 });
