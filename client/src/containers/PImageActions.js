@@ -15,8 +15,8 @@ export function getUserImages( payload){
     method: 'post',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `bearer ${Auth.getToken()}`
+      'Content-Type': 'application/json'
+      // 'Authorization': `bearer ${Auth.getToken()}`
     },
     body: JSON.stringify( payload)
   })
@@ -30,7 +30,7 @@ export function createNewImage( payload){
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `bearer ${Auth.getToken()}`
+      // 'Authorization': `bearer ${Auth.getToken()}`
     },
     body: JSON.stringify( payload)
   })
@@ -43,7 +43,7 @@ export function deleteImage( payload){
     headers: {
       'Accept': "application/json",
       'Content-Type': 'application/json',
-      'Authorization': `bearer ${Auth.getToken()}`
+      // 'Authorization': `bearer ${Auth.getToken()}`
     },
     body: JSON.stringify( payload)
   })
@@ -57,7 +57,7 @@ export function addFavourite( payload){
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `bearer ${Auth.getToken()}`
+      // 'Authorization': `bearer ${Auth.getToken()}`
     },
     body: JSON.stringify( payload)
   })
