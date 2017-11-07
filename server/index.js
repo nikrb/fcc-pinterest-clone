@@ -40,11 +40,6 @@ require( './passport/twitter-login')();
 // const authCheckMiddleware = require('./middleware/auth-check');
 // app.use('/api', authCheckMiddleware);
 
-app.use(function(req, res, next){
-  console.log( `request user [${req.user}]`);
-  next();
-});
-
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
 const apoRoutes = require( './routes/apo');
