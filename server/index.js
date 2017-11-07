@@ -1,6 +1,6 @@
 // testing prod local so always need dotenv
 // if( process.env.PORT !== "production"){
-  // require( 'dotenv').config();
+  require( 'dotenv').config();
 // }
 
 process.env.PORT = process.env.PORT || 5000;
