@@ -51,7 +51,7 @@ export default class HomePage extends React.Component {
     const authed = Auth.isUserAuthenticated();
     return (
       <div className="App">
-        <h1>pcloneInterest</h1>
+        <h1>pInterest Clone</h1>
         <Message style={message_style} text={this.state.message_text}
           removeMessage={this.onRemoveMessage} />
         <ImageWall data={this.state.image_list}
