@@ -58,7 +58,7 @@ export default class App extends Component {
                     </div>
                   :
                   <li>
-                    <a href="/auth/login/twitter" >
+                    <a href="https://knik-fcc-pclone.herokuapp.com/auth/login/twitter" >
                       Login
                     </a>
                   </li>
