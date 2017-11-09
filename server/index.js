@@ -1,4 +1,4 @@
-// testing prod local so always need dotenv
+// comment dotenv out for now as not required for production
 // if( process.env.PORT !== "production"){
   // require( 'dotenv').config();
 // }
