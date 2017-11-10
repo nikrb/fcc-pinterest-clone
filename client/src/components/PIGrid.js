@@ -27,7 +27,7 @@ export default class PIGrid extends React.Component {
         <div className="item" key={i} >
           <div style={card_style} >
             <ImageDefault style={image_style} src={p.url}
-              missing_url="http://via.placeholder.com/200x100?text=noimage"/>
+              missing_url="//via.placeholder.com/200x100?text=noimage"/>
             <span>{p.title}</span>
             <div style={button_wrapper}>
               {this.props.onDeleteClicked?

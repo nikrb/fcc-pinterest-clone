@@ -75,7 +75,7 @@ export default class NewImageDialogue extends React.Component {
         <h3>Add New Image</h3>
         <div style={image_box_style} >
           <ImageDefault style={image_style} src={url}
-            missing_url="http://via.placeholder.com/200x200?text=noimage"/>
+            missing_url="//via.placeholder.com/200x200?text=noimage"/>
         </div>
         <div style={ip_wrapper} >
           Title
