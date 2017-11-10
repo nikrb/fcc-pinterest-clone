@@ -1,7 +1,6 @@
-// comment dotenv out for now as not required for production
-// if( process.env.PORT !== "production"){
-  // require( 'dotenv').config();
-// }
+if( process.env.PORT !== "production"){
+  require( 'dotenv').config();
+}
 
 process.env.PORT = process.env.PORT || 5000;
 
@@ -27,7 +26,8 @@ app.use(session({
 }));
 
 app.use(function(req, res, next){
-  console.log( `request url [${req.url}]`);
+  console.log( `request: protocol [${req.protocol}] host [${req.hostname}]  
+    url [${req.url}] route [${req.route}]`);
   next();
 });
 
