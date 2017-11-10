@@ -28,7 +28,7 @@ app.use(session({
 
 app.use(function(req, res, next){
   console.log( `request: protocol [${req.protocol}] host [${req.hostname}]
-    url [${req.url}] route [${req.route}]`);
+    url [${req.url}]`);
   next();
 });
 
