@@ -15,21 +15,19 @@ module.exports = function(){
     callbackURL: callback_url // config.twitter.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
-    process.nextTick( function(){
-      var searchQuery = {
-        twitterId: profile.id
-      };
-      var update = {
-        twitterId: profile.id,
-        name: profile.displayName,
-        email:profile.email
-      };
-      var updateOptions = {
-        upsert: true
-      };
-      User.findOneAndUpdate(searchQuery, update, updateOptions, function(err, user) {
-          return done(err, user);
-      });
+    var searchQuery = {
+      twitterId: profile.id
+    };
+    var update = {
+      twitterId: profile.id,
+      name: profile.displayName,
+      email:profile.email
+    };
+    var updateOptions = {
+      upsert: true
+    };
+    User.findOneAndUpdate(searchQuery, update, updateOptions, function(err, user) {
+        return done(err, user);
     });
   }));
 }
