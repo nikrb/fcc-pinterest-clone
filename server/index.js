@@ -26,7 +26,7 @@ app.use(session({
 }));
 
 app.use(function(req, res, next){
-  console.log( `request: protocol [${req.protocol}] host [${req.hostname}]  
+  console.log( `request: protocol [${req.protocol}] host [${req.hostname}]
     url [${req.url}] route [${req.route}]`);
   next();
 });
@@ -54,10 +54,10 @@ app.use('/apo', apoRoutes);
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
-  app.use( '/', express.static('./client/build'));
+  app.use( '/', express.static( 'client/build'));
 
   app.get('/*', function (req, res) {
-    res.sendFile( './client/build/index.html');
+    res.sendFile( 'index.html');
   });
 }
 
