@@ -18,7 +18,7 @@ const app = express();
 
 app.use( bodyParser.json());
 app.use( bodyParser.urlencoded({ extended: false }));
-
+app.use( express.cookieParser());
 app.use(session({
   secret: "mysecretsessionpassword",
   resave: true,
