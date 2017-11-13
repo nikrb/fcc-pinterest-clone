@@ -1,7 +1,15 @@
 import {checkStatus, parseJSON} from '../modules/util';
 
 const checkUser = () => {
-  return fetch( "/auth/user")
+  return fetch( "/auth/user", {
+    method: "GET",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Cache': 'no-cache'
+    },
+    credentials: 'same-origin'
+  })
   .then( checkStatus)
   .then( parseJSON);
 };

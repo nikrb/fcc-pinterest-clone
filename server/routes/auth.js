@@ -22,7 +22,7 @@ function checkAuth(req, res, next) {
   return next();
 };
 
-router.get( "/user", checkAuth, function( req, res){
+router.get( "/user", function( req, res){
   console.log( "GET /auth/user :", req.user);
   res.send( {success: req.user?true:false, user: req.user});
 });

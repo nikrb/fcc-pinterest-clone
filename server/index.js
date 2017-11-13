@@ -1,7 +1,6 @@
-// comment dotenv out for now as not required for production
-// if( process.env.PORT !== "production"){
-  // require( 'dotenv').config();
-// }
+if( process.env.PORT !== "production"){
+  require( 'dotenv').config();
+}
 
 process.env.PORT = process.env.PORT || 5000;
 
