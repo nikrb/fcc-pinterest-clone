@@ -23,7 +23,7 @@ export default class HomePage extends React.Component {
     });
   };
   onAddFavourite = ( _id) => {
-    const favouriteer = Auth.get_id();
+    const favouriteer = Auth.getUser()._id;
     // TODO: add user feedback
     addFavourite( {_id, favouriteer})
     .then( (response) => {
