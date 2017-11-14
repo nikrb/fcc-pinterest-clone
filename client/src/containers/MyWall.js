@@ -10,7 +10,7 @@ export default class MyWall extends React.Component {
     show_new_image_dialogue: false
   };
   componentWillMount = () => {
-    const owner = Auth.get_id();
+    const owner = Auth.getUser()._id;
     getUserImages( {owner}) // , limit:10, offset: 0})
     .then( (response) => {
       console.log( "get user images response:", response);
@@ -32,10 +32,11 @@ export default class MyWall extends React.Component {
   onNewImageOK = (detail) => {
     // create new image for user
     console.log( "add new image:", detail);
+    const owner = Auth.getUser()._id;
     this.setState( {show_new_image_dialogue: false});
     const payload = {url:encodeURIComponent( detail.url),
       title:encodeURIComponent( detail.title),
-      owner:Auth.get_id(), created: new Date()};
+      owner, created: new Date()};
     createNewImage( payload)
     .then( (response) => {
       console.log( "create new image response:", response);
