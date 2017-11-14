@@ -10,14 +10,6 @@ function checkAuth(req, res, next) {
   return next();
 };
 
-router.post('/userimages', checkAuth, (req, res) => {
-  PImage.getByUserId( req.body, function( err, docs){
-    if( err) console.error( "get user images failed:", err);
-    res.json( docs);
-  });
-});
-
-
 router.post( '/userimage', checkAuth, (req, res) => {
   PImage.create( req.body, function( err, result){
     if( err) console.error( "create pimage failed:", err);

@@ -10,4 +10,11 @@ router.post('/pimages', (req, res) => {
   });
 });
 
+router.post('/userimages', (req, res) => {
+  PImage.getByUserId( req.body, function( err, docs){
+    if( err) console.error( "get user images failed:", err);
+    res.json( docs);
+  });
+});
+
 module.exports = router;
