@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch, NavLink } from 'react
 import './App.css';
 import HomePage from './containers/HomePage';
 import MyWall from './containers/MyWall';
+import AuthorWall from './containers/AuthorWall';
 import Auth from './modules/Auth';
 
 export default class App extends Component {
@@ -78,6 +79,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={HomePage}/>
             <AuthRoute path="/mywall" component={MyWall} />
+            <Route path="/authorwall" component={AuthorWall} />
             <Route path="*" render={props => <Redirect to='/' {...props} /> } />
           </Switch>
         </div>

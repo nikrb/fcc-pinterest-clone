@@ -73,6 +73,7 @@ PImageSchema.statics.getByUserId = function getByUserId( req_body, cb){
     limit,
     sort: {created:1}
   })
+  .populate( "owner", "name")
   .exec( function( err, docs){
     if( err || !docs || docs.length === 0){
       console.error( "PImage find failed:", err);
@@ -94,6 +95,7 @@ PImageSchema.statics.getAll = function getAll( req_body, cb){
     limit,
     sort: {created:1}
   })
+  .populate( "owner", "name")
   .exec( function( err, docs){
     if( err || !docs || docs.length === 0){
       console.error( "PImage find failed:", err);

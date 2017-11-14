@@ -1,9 +1,13 @@
 import React from 'react';
+import Author from './Author';
 import FavouriteButton from './FavouriteButton';
 import DeleteButton from './DeleteButton';
 import ImageDefault from './ImageDefault';
 
 export default class PIGrid extends React.Component {
+  componentWillMount = () => {
+    console.log( "PIGrid props:", this.props);
+  };
   render = () => {
     const {data} = this.props;
     const card_style = {
@@ -29,6 +33,7 @@ export default class PIGrid extends React.Component {
             <ImageDefault style={image_style} src={p.url}
               missing_url="//via.placeholder.com/200x100?text=noimage"/>
             <span>{p.title}</span>
+            <Author author={p.owner} authorClicked={this.props.authorClicked} />
             <div style={button_wrapper}>
               {this.props.onDeleteClicked?
                 <DeleteButton onClick={this.props.onDeleteClicked} data={p._id} />

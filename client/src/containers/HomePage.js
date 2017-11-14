@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import Auth from '../modules/Auth';
 import ImageWall from '../components/ImageWall';
 import Message from '../components/Message';
@@ -7,7 +8,8 @@ import {getAllImages, addFavourite} from './PImageActions';
 export default class HomePage extends React.Component {
   state = {
     image_list: [],
-    message_text: ""
+    message_text: "",
+    redirect: null
   };
   componentWillMount = () => {
     getAllImages()
@@ -42,7 +44,19 @@ export default class HomePage extends React.Component {
   onRemoveMessage = () => {
     this.setState( {message_text: ""});
   };
+  authorClicked = (owner) => {
+    this.setState( {redirect: owner});
+  };
   render = () => {
+    if( this.state.redirect){
+      return (
+        <Redirect to={{
+          pathname:"/authorwall",
+          state: { from: this.props.location},
+          author: this.state.redirect
+        }} />
+      );
+    }
     const show = this.state.message_text.length?true:false;
     const message_style = {
       color: "tomato",
@@ -55,7 +69,8 @@ export default class HomePage extends React.Component {
         <Message style={message_style} text={this.state.message_text}
           removeMessage={this.onRemoveMessage} />
         <ImageWall data={this.state.image_list}
-          onFavouriteClicked={authed?this.onAddFavourite:null} />
+          onFavouriteClicked={authed?this.onAddFavourite:null}
+          authorClicked={this.authorClicked} />
       </div>
     );
   };

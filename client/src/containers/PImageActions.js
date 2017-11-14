@@ -10,14 +10,12 @@ export function getAllImages( payload){
 }
 
 export function getUserImages( payload){
-  return fetch( '/api/userimages', {
+  return fetch( '/apo/userimages', {
     method: 'post',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Cache': 'no-cache'
     },
-    credentials: 'same-origin',
     body: JSON.stringify( payload)
   })
   .then( checkStatus)

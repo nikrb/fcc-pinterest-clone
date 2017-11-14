@@ -3,15 +3,10 @@ const TwitterStrategy = require('passport-twitter').Strategy;
 const User = require('mongoose').model('User');
 
 module.exports = function(){
-  const base = process.env.NODE_ENV === "production"
-    ? "https://knik-fcc-pclone.herokuapp.com"
-    :`http://localhost:5000`;
-  const callback_url = `/auth/callback/twitter`;
-
   passport.use(new TwitterStrategy({
-    consumerKey: process.env.CONSUMER_KEY, // config.twitter.consumerKey,
-    consumerSecret: process.env.CONSUMER_SECRET, // config.twitter.consumerSecret,
-    callbackURL: callback_url // config.twitter.callbackURL
+    consumerKey: process.env.CONSUMER_KEY,
+    consumerSecret: process.env.CONSUMER_SECRET,
+    callbackURL: "/auth/callback/twitter"
   },
   function(accessToken, refreshToken, profile, done) {
     var searchQuery = {
