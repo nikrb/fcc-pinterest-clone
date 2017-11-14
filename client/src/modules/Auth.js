@@ -20,8 +20,8 @@ const logout = () => {
   .then( parseJSON);
 };
 
-const authUser = ( {id, name}) => {
-  localStorage.setItem( "user_id", id);
+const authUser = ( {_id, name}) => {
+  localStorage.setItem( "user_id", _id);
   localStorage.setItem( "user_name", name);
 };
 const deauthUser = () => {
@@ -35,7 +35,7 @@ const isUserAuthenticated = () => {
 };
 const getUser = () => {
   const user = {};
-  user.id = localStorage.getItem( "user_id");
+  user._id = localStorage.getItem( "user_id");
   user.name = localStorage.getItem( "user_name");
   return user;
 };
