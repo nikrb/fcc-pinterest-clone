@@ -1,4 +1,3 @@
-import Auth from '../modules/Auth';
 import {checkStatus, parseJSON} from '../modules/util';
 
 export function getAllImages( payload){
@@ -16,8 +15,9 @@ export function getUserImages( payload){
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `bearer ${Auth.getToken()}`
+      'Cache': 'no-cache'
     },
+    credentials: 'same-origin',
     body: JSON.stringify( payload)
   })
   .then( checkStatus)
@@ -30,8 +30,9 @@ export function createNewImage( payload){
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `bearer ${Auth.getToken()}`
+      "Cache": "no-cache"
     },
+    credentials: "same-origin",
     body: JSON.stringify( payload)
   })
   .then( checkStatus)
@@ -43,8 +44,9 @@ export function deleteImage( payload){
     headers: {
       'Accept': "application/json",
       'Content-Type': 'application/json',
-      'Authorization': `bearer ${Auth.getToken()}`
+      "Cache": "no-cache"
     },
+    credentials: "same-origin",
     body: JSON.stringify( payload)
   })
   .then( checkStatus)
@@ -57,8 +59,9 @@ export function addFavourite( payload){
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `bearer ${Auth.getToken()}`
+      "Cache": "no-cache"
     },
+    credentials: "same-origin",
     body: JSON.stringify( payload)
   })
   .then( checkStatus)
