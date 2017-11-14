@@ -25,7 +25,8 @@ function checkAuth(req, res, next) {
 
 router.get( "/user", function( req, res){
   console.log( "GET /auth/user :", req.user);
-  res.send( {success: req.user?true:false, user: req.user});
+  const user = req.user?{_id: req.user._id, name: req.user.name}:{};
+  res.send( {success: req.user?true:false, user });
 });
 
 router.get( "/logout", function(req, res) {
