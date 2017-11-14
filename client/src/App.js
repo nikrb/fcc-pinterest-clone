@@ -6,6 +6,9 @@ import MyWall from './containers/MyWall';
 import Auth from './modules/Auth';
 
 export default class App extends Component {
+  state = {
+    is_logged_in: false
+  }
   componentWillMount = () => {
     Auth.checkUser()
     .then( (response)=>{
@@ -15,10 +18,12 @@ export default class App extends Component {
       } else {
         Auth.deauthUser();
       }
+      this.setState( {is_logged_in: Auth.isUserAuthenticated()});
     })
     .catch( (err) => {
       console.error( "fetch auth/user failed:", err);
       Auth.deauthUser();
+      this.setState( {is_logged_in: false});
     });
   };
   logout = () => {
@@ -30,13 +35,12 @@ export default class App extends Component {
     .catch( (err) => {
       console.error( "auth logout failed:", err);
     });
-  };
-  // FIXME: this is horrible right?
-  login = ( user) => {
-    // this.setState( {is_logged_in: true, user: {name: user.name, email: user.email}});
+    this.setState( {is_logged_in: false});
   };
 
   render() {
+    const login_twitter_url = process.env.NODE_ENV === "production"?
+      "/auth/login/twitter":"http://localhost:5000/auth/login/twitter";
     const username = Auth.getUser().name;
     const right_margin = {
       marginRight: "10px"
@@ -48,7 +52,10 @@ export default class App extends Component {
             <ul>
               <div className="nav-box">
                 <li><NavLink to="/" exact>Home</NavLink></li>
-                <li><NavLink to="/mywall" exact>My Wall</NavLink></li>
+                {Auth.isUserAuthenticated()?
+                  <li><NavLink to="/mywall" exact>My Wall</NavLink></li>
+                  :""
+                }
               </div>
               <div className="nav-box">
                 { Auth.isUserAuthenticated()?
@@ -58,7 +65,7 @@ export default class App extends Component {
                     </div>
                   :
                   <li>
-                    <a href="/auth/login/twitter" >
+                    <a href={login_twitter_url} >
                       Login
                     </a>
                   </li>
@@ -71,13 +78,11 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={HomePage}/>
             <AuthRoute path="/mywall" component={MyWall} />
+            <Route path="*" render={props => <Redirect to='/' {...props} /> } />
           </Switch>
         </div>
       </Router>
     );
-    // FIXME: seems this isn't intercepting the /auth/login/twitter route
-    // don't forget to put it back in!
-    // <Route path="*" render={props => <Redirect to='/' {...props} /> } />
   }
 };
 
