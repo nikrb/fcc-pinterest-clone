@@ -17,12 +17,6 @@ router.get( "/callback/twitter", function(req, res, next) {
   })(req, res, next);
 });
 
-function checkAuth(req, res, next) {
-  console.log( "checkAuth isAuthenticated exists:", req.isAuthenticated?true:false);
-  if (!req.isAuthenticated()) return res.status(401).send('Not authenticated');
-  return next();
-};
-
 router.get( "/user", function( req, res){
   console.log( "GET /auth/user :", req.user);
   const user = req.user?{_id: req.user._id, name: req.user.name}:{};
