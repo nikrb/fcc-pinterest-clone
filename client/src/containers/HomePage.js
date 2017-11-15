@@ -36,7 +36,7 @@ export default class HomePage extends React.Component {
         this.setState( {image_list});
       } else {
         dispatchEvent( new CustomEvent( "message-box",
-          {detail: { action: "show", text: "response.message"}}));
+          {detail: { action: "show", text: response.message}}));
       }
     });
   };
