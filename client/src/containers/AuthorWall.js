@@ -2,6 +2,7 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import ImageWall from '../components/ImageWall';
 import {getUserImages} from './PImageActions';
+import Auth from "../modules/Auth";
 
 export default class AuthorWall extends React.Component {
   state = {
@@ -26,8 +27,17 @@ export default class AuthorWall extends React.Component {
       this.setState( {redir: "/"});
     }
   };
-
+  onAddFavourite = ( {_id, favouriteer}) => {
+    const image_list = this.state.image_list.map( (i) => {
+      if( i._id === _id){
+        return {...i, favourites: i.favourites.concat( favouriteer)};
+      }
+      return i;
+    });
+    this.setState( {image_list});
+  };
   render = () => {
+    const authed = Auth.isUserAuthenticated();
     if( this.state.redir){
       return <Redirect to="/" />
     }
@@ -35,7 +45,8 @@ export default class AuthorWall extends React.Component {
     return (
       <div className="App">
         <h1>{`${name}'s`} Wall</h1>
-        <ImageWall data={this.state.image_list} />
+        <ImageWall data={this.state.image_list}
+          onFavouriteClicked={authed?this.onAddFavourite:null} />
       </div>
     );
   };
