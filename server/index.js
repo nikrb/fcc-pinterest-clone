@@ -49,10 +49,10 @@ app.use('/apo', apoRoutes);
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
-  app.use( '/', express.static( 'client/build'));
+  app.use( express.static( __dirname+"/../client/build"));
 
   app.get('/*', function (req, res) {
-    res.sendFile( 'index.html');
+    res.sendFile( "index.html", { root: __dirname+"/../client/build"});
   });
 }
 
