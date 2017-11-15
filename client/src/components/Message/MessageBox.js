@@ -5,6 +5,7 @@ export default class MessageBox extends React.Component {
     show: false,
     text: ""
   };
+  timeout_id = 0;
   componentWillMount = () => {
     window.addEventListener( "message-box", this.handleMessage);
   };
