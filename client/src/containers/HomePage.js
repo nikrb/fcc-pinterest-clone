@@ -2,13 +2,11 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import Auth from '../modules/Auth';
 import ImageWall from '../components/ImageWall';
-import Message from '../components/Message';
 import {getAllImages, addFavourite} from './PImageActions';
 
 export default class HomePage extends React.Component {
   state = {
     image_list: [],
-    message_text: "",
     redirect: null
   };
   componentWillMount = () => {
@@ -37,12 +35,10 @@ export default class HomePage extends React.Component {
         });
         this.setState( {image_list});
       } else {
-        this.setState( {message_text: response.message, show_message: true});
+        dispatchEvent( new CustomEvent( "message-box",
+          {detail: { action: "show", text: "response.message"}}));
       }
     });
-  };
-  onRemoveMessage = () => {
-    this.setState( {message_text: ""});
   };
   authorClicked = (owner) => {
     this.setState( {redirect: owner});
@@ -57,17 +53,10 @@ export default class HomePage extends React.Component {
         }} />
       );
     }
-    const show = this.state.message_text.length?true:false;
-    const message_style = {
-      color: "tomato",
-      background: show?"linen":"inherit"
-    };
     const authed = Auth.isUserAuthenticated();
     return (
       <div className="App">
         <h1>pinterest Clone</h1>
-        <Message style={message_style} text={this.state.message_text}
-          removeMessage={this.onRemoveMessage} />
         <ImageWall data={this.state.image_list}
           onFavouriteClicked={authed?this.onAddFavourite:null}
           authorClicked={this.authorClicked} />

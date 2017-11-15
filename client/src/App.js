@@ -5,6 +5,7 @@ import HomePage from './containers/HomePage';
 import MyWall from './containers/MyWall';
 import AuthorWall from './containers/AuthorWall';
 import Auth from './modules/Auth';
+import {MessageBox} from "./components/Message";
 
 export default class App extends Component {
   state = {
@@ -49,6 +50,7 @@ export default class App extends Component {
     return (
       <Router>
         <div>
+          <MessageBox />
           <div className="nav">
             <ul>
               <div className="nav-box">
