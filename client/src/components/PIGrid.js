@@ -1,6 +1,6 @@
 import React from 'react';
 import Author from './Author';
-import FavouriteButton from './FavouriteButton';
+import {FavouriteButton} from './Favourite';
 import DeleteButton from './DeleteButton';
 import ImageDefault from './ImageDefault';
 
@@ -41,8 +41,8 @@ export default class PIGrid extends React.Component {
                 :<div/>
               }
               <FavouriteButton data={p._id}
-                favourite_count={p.favourites.length||0}
-                onFavouriteClick={this.props.onFavouriteClicked} />
+                addFavourite={this.props.onFavouriteClicked}
+                favourite_count={p.favourites.length||0} />
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import Auth from '../modules/Auth';
 import ImageWall from '../components/ImageWall';
-import {getAllImages, addFavourite} from './PImageActions';
+import {getAllImages} from './PImageActions';
 
 export default class HomePage extends React.Component {
   state = {
@@ -20,25 +20,14 @@ export default class HomePage extends React.Component {
       this.setState( {image_list});
     });
   };
-  onAddFavourite = ( _id) => {
-    const favouriteer = Auth.getUser()._id;
-    // TODO: add user feedback
-    addFavourite( {_id, favouriteer})
-    .then( (response) => {
-      console.log( "add favourite response:", response);
-      if( response.success){
-        const image_list = this.state.image_list.map( (i) => {
-          if( i._id === _id){
-            return {...i, favourites: i.favourites.concat( favouriteer)};
-          }
-          return i;
-        });
-        this.setState( {image_list});
-      } else {
-        dispatchEvent( new CustomEvent( "message-box",
-          {detail: { action: "show", text: response.message}}));
+  onAddFavourite = ( {_id, favouriteer}) => {
+    const image_list = this.state.image_list.map( (i) => {
+      if( i._id === _id){
+        return {...i, favourites: i.favourites.concat( favouriteer)};
       }
+      return i;
     });
+    this.setState( {image_list});
   };
   authorClicked = (owner) => {
     this.setState( {redirect: owner});

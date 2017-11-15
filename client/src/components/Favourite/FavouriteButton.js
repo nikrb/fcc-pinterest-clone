@@ -1,15 +1,27 @@
 import React from 'react';
+import Auth from "../../modules/Auth";
+import {addFavourite} from "./actions";
 
 export default class FavouriteButton extends React.Component {
-  onClick = () => {
-    if( this.props.onFavouriteClick){
-      this.props.onFavouriteClick( this.props.data);
-    }
+  onClick = ( e) => {
+    const _id = this.props.data;
+    const favouriteer = Auth.getUser()._id;
+    // TODO: add user feedback
+    addFavourite( {_id, favouriteer})
+    .then( (response) => {
+      console.log( "add favourite response:", response);
+      if( response.success){
+        this.props.addFavourite( {_id, favouriteer});
+      } else {
+        dispatchEvent( new CustomEvent( "message-box",
+          {detail: { action: "show", text: response.message}}));
+      }
+    });
   };
   render = () => {
     const {favourite_count} = this.props;
     const heart = String.fromCharCode( 10084);
-    const favourite_enabled = this.props.onFavouriteClick?true:false;
+    const favourite_enabled = Auth.isUserAuthenticated();
     const heart_style = {
       cursor: favourite_enabled?"pointer":"inherit",
       color: favourite_enabled?"red":"lightgrey",
@@ -23,7 +35,7 @@ export default class FavouriteButton extends React.Component {
     const count_style = { fontSize: "1.15em"};
     return (
       <div style={wrapper}>
-        {this.props.onFavouriteClick?
+        {this.props.addFavourite?
           <button className="card_button" type="button" onClick={this.onClick} >
             <span style={heart_style}>{heart}</span>
           </button>
