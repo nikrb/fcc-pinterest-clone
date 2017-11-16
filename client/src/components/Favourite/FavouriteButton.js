@@ -21,7 +21,7 @@ export default class FavouriteButton extends React.Component {
   render = () => {
     const {favourite_count} = this.props;
     const heart = String.fromCharCode( 10084);
-    const favourite_enabled = Auth.isUserAuthenticated();
+    const favourite_enabled = Auth.isUserAuthenticated() && this.props.addFavourite;
     const heart_style = {
       cursor: favourite_enabled?"pointer":"inherit",
       color: favourite_enabled?"red":"lightgrey",
