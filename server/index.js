@@ -36,9 +36,8 @@ app.use( passport.session());
 
 require( './passport/twitter-login')();
 
-// let's sort basic auth out first
-// const authCheckMiddleware = require('./middleware/auth-check');
-// app.use('/api', authCheckMiddleware);
+const authCheckMiddleware = require('./middleware/auth-check');
+app.use('/api', authCheckMiddleware);
 
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
