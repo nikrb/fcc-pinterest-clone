@@ -19,9 +19,15 @@ export default class FavouriteButton extends React.Component {
     });
   };
   render = () => {
-    const {favourite_count} = this.props;
+    const {favourite_count, author_id} = this.props;
     const heart = String.fromCharCode( 10084);
-    const favourite_enabled = Auth.isUserAuthenticated() && this.props.addFavourite;
+    let favourite_enabled = false;
+    if( Auth.isUserAuthenticated()){
+      if( this.props.addFavourite && Auth.getUser()._id !== author_id ){
+        favourite_enabled = true;
+      }
+    }
+    // const favourite_enabled = Auth.isUserAuthenticated() && this.props.addFavourite;
     const heart_style = {
       cursor: favourite_enabled?"pointer":"inherit",
       color: favourite_enabled?"red":"lightgrey",
@@ -35,7 +41,7 @@ export default class FavouriteButton extends React.Component {
     const count_style = { fontSize: "1.15em"};
     return (
       <div style={wrapper}>
-        {this.props.addFavourite?
+        {favourite_enabled?
           <button className="card_button" type="button" onClick={this.onClick} >
             <span style={heart_style}>{heart}</span>
           </button>

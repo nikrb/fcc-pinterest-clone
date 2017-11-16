@@ -25,8 +25,7 @@ export default class PICard extends React.Component {
     const { author, title, authorClicked, image_src, onDeleteClicked, data_id,
       onFavouriteClicked, favourite_count} = this.props;
     return (
-      <div>
-        <div className="item" >
+      <div className="item" >
         <div style={card_style} >
           <ImageDefault style={image_style} src={image_src}
             missing_url="//via.placeholder.com/200x100?text=noimage"/>
@@ -38,11 +37,10 @@ export default class PICard extends React.Component {
               // blank div to keep favourite button on right
               :<div/>
             }
-            <FavouriteButton data={data_id}
+            <FavouriteButton data={data_id} author_id={author._id}
               addFavourite={onFavouriteClicked}
               favourite_count={favourite_count||0} />
           </div>
-        </div>
         </div>
       </div>
     );
