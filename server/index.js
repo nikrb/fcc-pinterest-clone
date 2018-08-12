@@ -34,7 +34,8 @@ app.use(function(req, res, next){
 app.use( passport.initialize());
 app.use( passport.session());
 
-require( './passport/twitter-login')();
+require('./passport/passport');
+require('./passport/twitter');
 
 const authCheckMiddleware = require('./middleware/auth-check');
 app.use('/api', authCheckMiddleware);

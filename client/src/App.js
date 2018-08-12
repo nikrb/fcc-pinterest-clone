@@ -42,7 +42,8 @@ export default class App extends Component {
 
   render() {
     const login_twitter_url = process.env.NODE_ENV === "production"?
-      "/auth/login/twitter":"http://localhost:5000/auth/login/twitter";
+      "/auth/login/twitter":"http://127.0.0.1:5000/auth/login/twitter";
+    console.log('twitter login url:', login_twitter_url);
     const username = Auth.getUser().name;
     const right_margin = {
       marginRight: "10px"

@@ -4,13 +4,13 @@ const passport = require( 'passport');
 const router = new express.Router();
 
 router.get( "/login/twitter", function(req, res, next) {
-  console.log( "twitter login")
+  console.log( "twitter login session:", req.session);
   return passport.authenticate('twitter')(req, res, next);
 });
 
 router.get( "/callback/twitter", function(req, res, next) {
-  console.log( "twitter callback:", process.env.NODE_ENV);
-  const redir = process.env.NODE_ENV === "production"?"/":"http://localhost:3000/";
+  console.log( "twitter callback session:", req.session);
+  const redir = process.env.NODE_ENV === "production"?"/":"http://127.0.0.1:3000/";
   return passport.authenticate('twitter', {
     successRedirect: redir,
     failureRedirect: redir
