@@ -13,11 +13,13 @@ export default class HomePage extends React.Component {
     getAllImages()
     .then( (response) => {
       console.log( response);
-      const image_list = response.data.map( (i) => {
-        return {...i, url: decodeURIComponent( i.url),
-          title: decodeURIComponent( i.title)};
-      });
-      this.setState( {image_list});
+      if (response.success) {
+        const image_list = response.data.map( (i) => {
+          return {...i, url: decodeURIComponent( i.url),
+            title: decodeURIComponent( i.title)};
+          });
+          this.setState( {image_list});
+      }
     });
   };
   onAddFavourite = ( {_id, favouriteer}) => {
