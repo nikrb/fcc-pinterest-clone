@@ -2,6 +2,8 @@ const passport = require('passport');
 const TwitterStrategy = require('passport-twitter').Strategy;
 const User = require('../models/user');
 
+console.log('twitter auth callback:', process.env.TWITTER_CALLBACK_URL);
+
 passport.use(
   new TwitterStrategy({
       consumerKey: process.env.CONSUMER_KEY,
@@ -10,14 +12,15 @@ passport.use(
     },
     /* eslint-disable func-names, prefer-arrow-callback */
     function(accessToken, refreshToken, profile, done) {
+    console.log('twitter profile:', profile);
       const searchQuery = {
         twitterId: profile.id,
       };
       const update = {
         twitterId: profile.id,
-        name: profile.username || `noname:${profile.id}`,
+        name: profile.displayName,
         // eslint-disable-next-line no-underscore-dangle
-        email: profile.displayName || `noemail:${profile.id}`,
+        email: profile.email,
       };
       const updateOptions = {
         upsert: true,

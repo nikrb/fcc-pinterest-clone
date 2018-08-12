@@ -1,6 +1,8 @@
-if( process.env.NODE_ENV !== "production"){
-  require( 'dotenv').config();
-}
+// if( process.env.PORT !== "production"){
+//   require( 'dotenv').config();
+// }
+
+// process.env.PORT = process.env.PORT || 5000;
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -45,6 +47,9 @@ app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/apo', apoRoutes);
 
+console.log('prod dir:', __dirname);
+console.log('env:', process.env.NODE_ENV);
+            
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
   app.use( express.static( __dirname+"/../client/build"));

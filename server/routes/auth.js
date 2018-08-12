@@ -5,6 +5,7 @@ const router = new express.Router();
 
 router.get( "/login/twitter", function(req, res, next) {
   console.log( "twitter login session:", req.session);
+  console.log('twitter callback:', process.env.TWITTER_CALLBACK_URL);
   return passport.authenticate('twitter')(req, res, next);
 });
 
