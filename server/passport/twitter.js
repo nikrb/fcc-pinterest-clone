@@ -16,9 +16,9 @@ passport.use(
       };
       const update = {
         twitterId: profile.id,
-        name: profile.displayName,
+        name: profile.username || `noname:${profile.id}`,
         // eslint-disable-next-line no-underscore-dangle
-        email: profile.email,
+        email: profile.displayName || `noemail:${profile.id}`,
       };
       const updateOptions = {
         upsert: true,
