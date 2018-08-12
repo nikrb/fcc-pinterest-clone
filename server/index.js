@@ -1,8 +1,6 @@
-if( process.env.PORT !== "production"){
+if( process.env.NODE_ENV !== "production"){
   require( 'dotenv').config();
 }
-
-process.env.PORT = process.env.PORT || 5000;
 
 const express = require('express');
 const bodyParser = require('body-parser');
